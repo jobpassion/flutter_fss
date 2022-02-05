@@ -1,6 +1,6 @@
 name: fss
-description: Style your widgets with a css like theme file.
-version: 0.1.0
+description: Flutter Style Sheets allows you to style your widgets with a "CSS like" theme file.
+version: 0.1.1
 homepage: https://github.com/Rossi1337/flutter_fss
 repository: https://github.com/Rossi1337/flutter_fss
 issue_tracker: https://github.com/Rossi1337/flutter_fss/issues

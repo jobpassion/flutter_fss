@@ -36,7 +36,7 @@ Here a minimum example:
     }
 ```
 
-Look into the [examples](example/lib)*examples* folder to see how this all works with more complex widgets.
+Look into the [examples](example/lib) folder to see how this all works with more complex widgets.
 
 ## Writing Stylesheets
 
