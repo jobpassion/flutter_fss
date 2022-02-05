@@ -1,7 +1,9 @@
 name: fss
 description: Style your widgets with a css like theme file.
-version: 0.0.1
-homepage:
+version: 0.1.0
+homepage: https://github.com/Rossi1337/flutter_fss
+repository: https://github.com/Rossi1337/flutter_fss
+issue_tracker: https://github.com/Rossi1337/flutter_fss/issues
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
