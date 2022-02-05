@@ -4,16 +4,16 @@ Style your apps with "CSS like" theme files.
 
 This allows you to cleanly separate the theme and styling from your code.
 The Flutter styling system is fully in code, hard to extend and not cleanly fitting for your own components.
-For this reason and why CSS is a well known technology I decided to bring the benefits of CSS to the Flutter world.
+For this reason and as CSS is a well known technology I decided to bring the benefits of CSS to the Flutter world.
 
 ## Getting Started
 
 Styling your widget with FSS involves basically the following steps.
-1. Install your stylesheet into the widget tree via the [FssTheme] widget
-The most common way is to use the [FssTheme.withAppDefaults] factory method.
+1. Install your stylesheet into the widget tree via the `FssTheme` widget
+The most common way is to use the `FssTheme.withAppDefaults` factory method.
 2. Provide a style sheet as string or load it from a resource into the FssTheme.
 3. Add styleable widgets to your UI and assign FSS classes and IDs to them.
-For this you should have a look at the [Fss] class that offers a variety of factory methods to
+For this you should have a look at the `Fss` class that offers a variety of factory methods to
 create styleable widgets.
 
 Here a minimum example:
@@ -36,7 +36,7 @@ Here a minimum example:
     }
 ```
 
-Look into the *examples* folder to see how this all works with more complex widgets.
+Look into the [examples](example/lib)*examples* folder to see how this all works with more complex widgets.
 
 ## Writing Stylesheets
 
@@ -54,9 +54,9 @@ selector {
 }
 ```
 
-**ATTENTION: The parser expects the open and closing brackets exactly like this. You cannot put multiple rules or multiple properties on a single line! Line breaks matter here! When saving or loading a stylesheet from a file that file must be UFT-8 encoded.**
+**ATTENTION: The parser expects the open and closing brackets exactly like this. You cannot put multiple rules or multiple properties on a single line! Line breaks matter here! When saving or loading a stylesheet from a file that file must be UTF-8 encoded.**
 
-**In FSS in contrast to CSS we try to be as much case insensitive as possible. This means all property names, values, class names, selectors, ... are ignoring case. 
+**In FSS in contrast to CSS we try to be as much case insensitive as possible. This means all property names, values, class names, selectors... are ignoring case. 
 Only for some exceptions like font names, paths or URLs we need proper case. As a best practice prefer using lowercase when possible everywhere.**
   
  
@@ -85,13 +85,13 @@ div.myclass {
 ```
 
 Rules are matched in the same way as in CSS. Properties are defined like in CSS with property name and value.
-You can combine selectors as in CSS  as seen in the example above where we have a type `div` and a class `myclass`.
+You can combine selectors as in CSS as seen in the example above where we have a type `div` and a class `myclass`.
 
 We **DO** support:
 - .class
 - .class1.class2
 - #id
-- *
+- \*
 - element
 - element.class
 - element,element
@@ -183,7 +183,7 @@ You can define values in the following units:
 - rem
 - em
 
-Check class [FssSize] to see all the options.
+Check class `FssSize` to see all the options.
 
 Here an example:
 
@@ -198,7 +198,7 @@ div {
   font-size: 24px;
 }
 ```
-**DO NOT** put whitespace between value and unit!
+**DO NOT** put white-space between value and unit!
 
 We **DO NOT** support **percentage (%)** for most properties because of the way Flutter layout works this is not easy to implement.
 This is only supported for some specific use cases (for example in gradient stops.)
@@ -206,10 +206,10 @@ This is only supported for some specific use cases (for example in gradient stop
 ### Setting defaults values
 
 The easiest way to set some good defaults for colors, fonts and some other properties is to use the system defaults.
-This can be done by using [FssTheme.withAppDefaults()] to create your theme. This will add styles and default rules
+This can be done by using `FssTheme.withAppDefaults()` to create your theme. This will add styles and default rules
 to based on the current Material Theme's values. This offers a good starting point.
 
-Another way is to create a [FssTheme] and provide defaults via the `systemDefaults` and `rules` as constructor parameters.
+Another way is to create a `FssTheme` and provide defaults via the `systemDefaults` and `rules` as constructor parameters.
 
 To set defaults via the stylesheet a good way is via the * selector that will match all elements:
 
@@ -223,11 +223,11 @@ To set defaults via the stylesheet a good way is via the * selector that will ma
 
 Properties will be resolved in the following way.
 1. If something is defined via a rule that value is used
-2. else if the property is inheritable then we get the inherited value from the  _parent_
+2. else if the property is inheritable then we get the inherited value from the _parent_
 3. else use the default value
 
 For default values the following is the order: 
-1. Hardcoded default values
+1. Hard-coded default values
 2. can be overwritten by values from the Flutter Theme 
 3. can be overwritten by values provided as constructor parameter
 
@@ -250,26 +250,26 @@ This uses the same syntax as CSS.
 }
 ```
 
-Look at the examples and the [FssMediaSelector] to learn more about what media query syntax is supported.
+Look at the examples and the `FssMediaSelector` to learn more about what media query syntax is supported.
 
 ## Styling your widgets
 
 To apply the styles from your stylesheet file to widgets you need to use special widgets which are 
-styleable. The [Fss] class offers some helper methods to create widgets which are similar to commonly used HTML elements.
+styleable. The `Fss` class offers some helper methods to create widgets which are similar to commonly used HTML elements.
 There is basically two types of widgets. Block widgets like p, div... and text widgets like h1 - h6, bodyText, caption...
 
-Block widgets are using in the background the [FssBox] widget. That one will apply automatically a set of properties like: background, border, padding and margin, box-shadow and some more.
-Text widgets are implemented in the class [FssText]. This one mainly applies automatically: font, color, outline and some other properties which are related to text.
+Block widgets are using in the background the `FssBox` widget. That one will apply automatically a set of properties like: background, border, padding and margin, box-shadow and some more.
+Text widgets are implemented in the class `FssText`. This one mainly applies automatically: font, color, outline and some other properties which are related to text.
 
-If you want to style your own widget you can use [Fss.styled] factory method which will resolve for you automatically the styles and give you access to it via a builder.
-Alternatively you can implement your own widget by extending the [FssWidget] class and implementing the
+If you want to style your own widget you can use `Fss.styled` factory method which will resolve for you automatically the styles and give you access to it via a builder.
+Alternatively you can implement your own widget by extending the `FssWidget` class and implementing the
 
 `Widget buildContent(BuildContext context, FssRuleBlock applicableStyles);` 
 
 method.
 
 Due to the differences in HTML and Flutter widget trees the styling is mainly limited to the look of widgets.
-Features related to layout like flex, grid, ... are not supported or only very limited. Keep this in mind.
+Features related to layout like flex, grid... are not supported or only very limited. Keep this in mind.
 
 Layout is done in Flutter, styling is done in the stylesheet file.
 
@@ -290,7 +290,7 @@ but you can use any name element name that you want like: "button", "list", "spi
 **fssClass** - Allows you to assign a space separated list of class names to your element. These will then be used
 to match the class names used in the rules: For example the following will assign three classes to your element: "box header colorful"
 
-Based on these attributes plus the current [MediaQuery] the rules will be resolved.
+Based on these attributes plus the current `MediaQuery` the rules will be resolved.
 
 Here an example of a widget that we assign an ID, type and classes to:
 
@@ -303,7 +303,7 @@ Fss.box(
 )
 ```
 
-When you use the [Fss] factory methods a fssType will be often set automatically.
+When you use the `Fss` factory methods a fssType will be often set automatically.
 
 ### Inheritance
 
@@ -338,14 +338,14 @@ class TestApp extends StatelessWidget {
 In the example above the  _parent_  of the text widgets "Test 1" and "Test 2" will be in both cases the div.
 The intermediate widgets like the Center or the ListView will be ignored as they are not FSS styleable widgets.
 
-To inject a parent into the tree or to define values to inherit for a widget subtree you can use the [FssParent] widget.
+To inject a parent into the tree or to define values to inherit for a widget subtree you can use the `FssParent` widget.
 
 ### Accessing styles programmatically
 
-The easiest way is to use [Fss.styled] factory method. This wraps your widget and, will allow you
-access to the applicable styles via a parameter in the [FssWidgetBuilder].
+The easiest way is to use `Fss.styled` factory method. This wraps your widget and, will allow you
+access to the applicable styles via a parameter in the `FssWidgetBuilder`.
 
-Another way to access the current effective styles you can retrieve them via the [resolveApplicableStyles]
+Another way to access the current effective styles you can retrieve them via the `resolveApplicableStyles`
 helper method from the BuildContext:
 
 ```dart
@@ -370,11 +370,11 @@ class TestApp extends StatelessWidget {
   }
 }
 ```
-The resolved [FssRuleBlock] gives you access to all the properties with the following methods:
-[FssRuleBlock.get], [FssRuleBlock.getString], [FssRuleBlock.getSize], [FssRuleBlock.getColor]
+The resolved `FssRuleBlock` gives you access to all the properties with the following methods:
+`FssRuleBlock.get`, `FssRuleBlock.getString`, `FssRuleBlock.getSize`, `FssRuleBlock.getColor`
 
 and additionally it offers a lot of methods to access Flutter helper objects configured from the
-properties like: [TextStyle], [BoxConstraints], colors, [BoxBorder], [Alignment]
+properties like: `TextStyle`, `BoxConstraints`, colors, `BoxBorder`, `Alignment`
 and other ready to use Flutter object.
 
 ## Property Reference
@@ -473,5 +473,11 @@ Example: `content-visibility: hidden;`
 ...and many many more which still need to be documented.
 
 ## Function Reference
+Fss has support for the following functions that you can use inside of the fss files similar to the CSS functions. 
 
-TODO Add here infos about var, rgb, hsl, ... and gradient functions.
+For colors you can use rgb(), rgba(), hsl(), hsla(), ... and gradient functions. (See Colors section)
+
+You can define your own variables and use them via the var() function. (See Variables section) 
+
+TODO: some more info about the functions syntax supported, but I'm too lazy today. 
+ 
