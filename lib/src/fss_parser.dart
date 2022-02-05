@@ -1,11 +1,9 @@
 library fss_parser;
 
 import 'dart:math';
-import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:fss/src/fss_dashed_border.dart';
 
 /// Represents a style sheet containing a set of rules.
@@ -1475,13 +1473,14 @@ class FssSelector {
     MediaQueryData? media,
   ]) {
     int specificity = noMatch;
+    final matchTypeL = matchType?.toLowerCase();
 
     // Check type
     if (type == typeAll) {
       specificity += 1;
-    } else if (type.isNotEmpty && type != matchType) {
+    } else if (type.isNotEmpty && type != matchTypeL) {
       return noMatch;
-    } else if (type.isNotEmpty && type == matchType) {
+    } else if (type.isNotEmpty && type == matchTypeL) {
       specificity += 5;
     }
 
@@ -1489,17 +1488,21 @@ class FssSelector {
     if (classes.isNotEmpty && (matchClasses == null || matchClasses.isEmpty)) {
       return noMatch;
     }
+
+    final matchClassesL = [];
+    matchClasses?.forEach((cl) => matchClassesL.add(cl.toLowerCase()));
     for (final cl in classes) {
-      if (!matchClasses!.contains(cl)) {
+      if (!matchClassesL.contains(cl)) {
         return noMatch;
       }
     }
     specificity += classes.length * 1000;
 
     // Check ID
-    if (id.isNotEmpty && id != matchId) {
+    final matchIdL = matchId?.toLowerCase();
+    if (id.isNotEmpty && id != matchIdL) {
       return noMatch;
-    } else if (id.isNotEmpty && id == matchId) {
+    } else if (id.isNotEmpty && id == matchIdL) {
       specificity += 1000000;
     }
     return specificity;

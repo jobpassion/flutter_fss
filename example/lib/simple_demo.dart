@@ -3,43 +3,48 @@ import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:fss/fss.dart';
 
+/// The stylesheet should normally be an own assets file
+/// It is defined here inline for the example
 const styleSheet = '''
-
-div {
-  text-align: center;
-  background-color: yellow;
-  color: black;
+.box {
+  width: 200px;
+  height: 50px;
+  text-align: center; 
   margin: 5px;
-  border: 5px outset #999999;
+  background-image: linear-gradient(180deg, #111174, #3d72b4);
+  border-radius: 10px;
+  box-shadow: 3 3 1.5 0.5 gray;  
 }
 
+#myText {   
+  color: white;
+  font-size: 32px;  
+}
 ''';
 
-/// Main method of the test application
+/// Entry point
 void main() {
   runApp(const TestApp());
 }
 
-/// Creates a simple app with a single list.
-/// So you get the styles of the STYLESHEET above.
+/// Creates a simple app
 class TestApp extends StatelessWidget {
-  /// Constructor
   const TestApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'FSS Simple Demo',
+      // Install the theme with the given stylesheet
       builder: (c, _) => FssTheme.withAppDefaults(
         context: c,
         stylesheet: styleSheet,
-        child: GridView.count(
-          crossAxisCount: 5,
-          padding: const EdgeInsets.all(8),
-          children: [
-            Fss.div(child: Fss.text('Test')),
-          ],
+        // Add a div with a given "class" and a text with a given "id"
+        child: Center(
+          child: Fss.div(
+            fssClass: 'box',
+            child: Fss.text('Hello World', fssID: 'myText'),
+          ),
         ),
       ),
     );
