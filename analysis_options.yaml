@@ -1,0 +1,23 @@
+include: package:lint/analysis_options_package.yaml
+
+linter:
+  rules:
+    # ------ Enable individual rules ------ #
+    #                 ---                   #
+    # These rules here are good but too     #
+    # opinionated to enable them by default #
+    # ------------------------------------- #
+
+    prefer_single_quotes: true
+    #public_member_api_docs: true
+
+    # ------ Disable individual rules ----- #
+    #                 ---                   #
+    # Turn off what you don't like.         #
+    # ------------------------------------- #
+
+    # Util classes allowed
+    avoid_classes_with_only_static_members: false
+
+    # We turn this off because of "css style" property names like this: background_color
+    constant_identifier_names : false

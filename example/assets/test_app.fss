@@ -1,0 +1,52 @@
+/* Set defaults for all FSS elements */
+* {
+  font-family: Roboto;
+  list-style-type: disc;
+}
+
+/* All headlines will have by default a text shadow */
+h1, h2, h3, h4, h5, h6 {
+  text-shadow: .5em 0.5em 0.5em #0c0c0c;
+}
+
+/* This will style the main background frame via the class .frame */
+.frame {
+  border: thick solid gray;
+  box-shadow: 1px 1px 3px 3px #333333;
+  background-color: white;
+  margin: 10px;
+  color: #c00000;
+  text-align: center;
+}
+
+/* This will style only the ol which has additionally the class "simple" assigned */
+ol.simple {
+  color: indigo;
+  background-color: #f0f0f0;
+}
+
+/* This will style the button which we assigned a own element "type" too */
+button {
+  color: Indigo;
+  background-color: LightBlue;
+}
+
+/* This will style the image via its ID */
+#my_img {
+  width: 300px;
+  height: 150px;
+  margin: 10px;
+  border: 3px solid indigo;
+  border-radius: 5px;
+}
+
+/* We also support media queries. When the app is resized the rules change */
+@media screen (width <= 600px) AND (height <= 1000px)  {
+
+/* When the screen is smaller than 600px then change h1 and h2  */
+  h1, h2 {
+    color: rgb(155,0,0);
+    font-size: 32px;
+  }
+
+}
