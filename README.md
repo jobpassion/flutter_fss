@@ -121,7 +121,7 @@ Properties always consist of a name and a value definition.
 
 **Normally property names and values are case insensitive. Some like font names, paths or URLs may need proper case. As a best practice prefer using lowercase when possible.**
 
-Property names starting with **--** are interpreted as variables (see Variables section below).
+Property names starting with **--** are interpreted as variables (see [Variables](#variables) section below).
 Property names starting with **-fss** are proprietary. This prefix is reserved for internal use.
 
 The property value definition part can consist of one or more values that are separated by spaces.
@@ -154,6 +154,7 @@ div {
   color: var(--mycolor);
 }
 ```
+See also section [System Theme Variables](#system-theme-variables) below.
 
 ### Colors
 
@@ -472,12 +473,820 @@ Example: `content-visibility: hidden;`
 ----
 ...and many many more which still need to be documented.
 
+----
+##### accent_color
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### background-color
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### background-image
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### background-position
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### background-repeat
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### background-size
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### border
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### border-bottom
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### border-bottom-color
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### border-bottom-left-radius
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### border-bottom-right-radius
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### border-bottom-style
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### border-bottom-width
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### border-color
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### border-left
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### border-left-color
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### border-left-style
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### border-left-width
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### border-radius
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### border-right
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### border-right-color
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### border-right-style
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### border-right-width
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### border-style
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### border-top
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### border-top-color
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### border-top-left-radius
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### border-top-right-radius
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### border-top-style
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### border-top-width
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### border-width
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### box-shadow
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### caret-color
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### color
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### content
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### content-visibility
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### direction
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### font
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### font-family
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### font-size
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### font-style
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### font-weight
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### height
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### letter-spacing
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### line-height
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### list-style-image
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### list-style-type
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### margin
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### margin-bottom
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### margin-left
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### margin-right
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### margin-top
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### max-height
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### max-width
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### min-height
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### min-width
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### padding
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### padding-bottom
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### padding-left
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### padding-right
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### padding-top
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### text-align
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### text-decoration
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### text-decoration-color
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### text-decoration-line
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### text-decoration-style
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### text-decoration-thickness
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### text-overflow
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### text-shadow
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### text-stroke
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### text-stroke-color
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### text-stroke-width
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### text-transform
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### transform
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### vertical-align
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### visibility
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### white-space
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### width
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+##### word-spacing
+
+
+Allowed values:   
+Initial value: 
+
+Example: ``  
+
+----
+
 ## Function Reference
 Fss has support for the following functions that you can use inside of the fss files similar to the CSS functions. 
 
-For colors you can use rgb(), rgba(), hsl(), hsla(), ... and gradient functions. (See Colors section)
-
-You can define your own variables and use them via the var() function. (See Variables section) 
-
-TODO: some more info about the functions syntax supported, but I'm too lazy today. 
+For colors you can use:
  
+rgb() 
+
+rgba()
+
+hsl()
+
+hsla() 
+
+... and gradient functions. (See [Colors](#colors) section)
+
+You can define your own variables and use them via the 
+
+var() 
+
+function. (See [Variables](#variables) section) 
+ 
+## System Theme Variables
+The following variables can be used in your stylesheet if you install the theme via 
+`FssTheme.withAppDefaults` . This will read out the Flutter Theme and inject the variables.
+
+--mat-background-color
+
+--mat-bottom-appbar-color
+
+--mat-brightness
+
+--mat-canvas-color
+
+--mat-card-color
+
+--mat-color-background
+
+--mat-color-brightness
+
+--mat-color-error
+
+--mat-color-onbackground
+
+--mat-color-onerror
+
+--mat-color-onprimary
+
+--mat-color-onsecondary
+
+--mat-color-onsurface
+
+--mat-color-primary
+
+--mat-color-primaryvariant
+
+--mat-color-secondary
+
+--mat-color-secondaryvariant
+
+--mat-color-surface
+
+--mat-dialog-background-color
+
+--mat-disabled-color
+
+--mat-divider-color
+
+--mat-error-color
+
+--mat-focus-color
+
+--mat-highlight-color
+
+--mat-hint-color
+
+--mat-hover-color
+
+--mat-indicator-color
+
+--mat-primary-color
+
+--mat-primary-color-brightness
+
+--mat-primary-color-dark
+
+--mat-primary-color-light
+
+--mat-scaffold-background-color
+
+--mat-secondary-header-color
+
+--mat-selected-row-color
+
+--mat-shadow-color
+
+--mat-splash-color
+
+--mat-toggleable-active-color
+
+--mat-unselected-widget-color
+
+--mat-visual-density-horizontal
+
+--mat-visual-density-vertical

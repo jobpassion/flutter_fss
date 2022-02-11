@@ -14,7 +14,6 @@ library fss_widgets;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:fss/src/material_bridge.dart';
 
 import 'fss_parser.dart';
