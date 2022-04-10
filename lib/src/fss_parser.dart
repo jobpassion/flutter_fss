@@ -91,6 +91,20 @@ class FlutterStyleSheet {
     for (final match in matchedRules) {
       result = result.merge(match.rule.properties);
     }
+
+    // Add some values from media
+    final screenSize = media?.size;
+    if (screenSize != null) {
+      final vwName = FssProperty.fss_screen_width.name;
+      final vhName = FssProperty.fss_screen_height.name;
+      result = result.merge(
+        FssRuleBlock({
+          vwName: FssPropertyValue(vwName, '${screenSize.width}px'),
+          vhName: FssPropertyValue(vhName, '${screenSize.height}px'),
+        }),
+      );
+    }
+
     return result;
   }
 
@@ -149,6 +163,18 @@ class FssRule {
 /// given element.
 @immutable
 class FssRuleBlock {
+  /// Constructs a rule from the given properties.
+  FssRuleBlock(
+    Map<String, FssPropertyValue>? properties, {
+    FssRuleBlock? parent,
+    FssRuleBlock? initialValues,
+  })  : _parent = parent,
+        _initialValues = initialValues {
+    if (properties != null) {
+      _properties.addAll(properties);
+    }
+  }
+
   final Map<String, FssPropertyValue> _properties = {};
   final FssRuleBlock? _initialValues;
   final FssRuleBlock? _parent;
@@ -174,11 +200,11 @@ class FssRuleBlock {
     var propValue = get(FssProperty.background_repeat.name);
     final repeat = propValue == null
         ? ImageRepeat.repeat
-        : _parseBackroundRepeat(propValue);
+        : _parseBackgroundRepeat(propValue);
 
     propValue = get(FssProperty.background_size.name);
     final BoxFit? boxFit =
-        propValue == null ? null : _parseBackroundSize(propValue);
+        propValue == null ? null : _parseBackgroundSize(propValue);
 
     propValue = get(FssProperty.background_position.name);
     AlignmentGeometry align = Alignment.topLeft;
@@ -628,13 +654,16 @@ class FssRuleBlock {
         return '${position.toString().padLeft('$max'.length, '0')}.';
       case 'lower-alpha':
       case 'lower-latin':
+        // Fix this: Does not work nicely if z is reached
         final char = 'a'.codeUnitAt(0) + position - 1;
         return '${String.fromCharCode(char)}.';
       case 'upper-alpha':
       case 'upper-latin':
+        // Fix this: Does not work nicely if z is reached
         final char = 'A'.codeUnitAt(0) + position - 1;
         return '${String.fromCharCode(char)}.';
       case 'lower-greek':
+        // Fix this: Does not work nicely if z is reached
         final char = 'α'.codeUnitAt(0) + position - 1;
         return '${String.fromCharCode(char)}.';
       case 'lower-roman':
@@ -644,18 +673,6 @@ class FssRuleBlock {
     }
     // A custom string
     return value!;
-  }
-
-  /// Constructs a rule from the given properties.
-  FssRuleBlock(
-    Map<String, FssPropertyValue>? properties, {
-    FssRuleBlock? parent,
-    FssRuleBlock? initialValues,
-  })  : _parent = parent,
-        _initialValues = initialValues {
-    if (properties != null) {
-      _properties.addAll(properties);
-    }
   }
 
   /// Merges this rule with another one.
@@ -785,7 +802,23 @@ class FssRuleBlock {
     final remBase = _initialValues == null
         ? null
         : _initialValues!.getSize(FssProperty.font_size.name);
-    return FssBase(remBase: remBase, emBase: emBase);
+
+    // Screen size is stored in internal properties
+    final screenWidth = FssSize.parse(
+      get(FssProperty.fss_screen_width.name)?.value ??
+          FssProperty.fss_screen_width.initialValue!,
+    ).value;
+    final screenHeight = FssSize.parse(
+      get(FssProperty.fss_screen_height.name)?.value ??
+          FssProperty.fss_screen_height.initialValue!,
+    ).value;
+
+    return FssBase(
+      remBase: remBase,
+      emBase: emBase,
+      screenWidth: screenWidth,
+      screenHeight: screenHeight,
+    );
   }
 
   // Resolves the value of a given property by replacing variables and
@@ -1011,7 +1044,7 @@ class FssRuleBlock {
     }
   }
 
-  ImageRepeat _parseBackroundRepeat(FssPropertyValue valueDef) {
+  ImageRepeat _parseBackgroundRepeat(FssPropertyValue valueDef) {
     ImageRepeat repeat = ImageRepeat.noRepeat;
     switch (valueDef.value) {
       case 'repeat':
@@ -1029,7 +1062,7 @@ class FssRuleBlock {
     return repeat;
   }
 
-  BoxFit? _parseBackroundSize(FssPropertyValue valueDef) {
+  BoxFit? _parseBackgroundSize(FssPropertyValue valueDef) {
     BoxFit? result;
     switch (valueDef.value) {
       case 'contain':
@@ -1883,6 +1916,12 @@ class FssProperty {
   // The space between symbol and the start of a list item
   static const fss_dashed_pattern =
       FssProperty._('-fss-dashed-pattern', '8.0 8.0');
+  // used to inject the current screen width
+  static const fss_screen_width =
+      FssProperty._('-fss-screen-width', '${FssBase.dummyScreenWidth}px');
+  // used to inject the current screen height
+  static const fss_screen_height =
+      FssProperty._('-fss-screen-height', '${FssBase.dummyScreenHeight}px');
 
   static const List<FssProperty> all = [
     accent_color,
@@ -2338,6 +2377,18 @@ class FssSize {
       case 'relative':
         result = base.em + value;
         break;
+      case 'vw':
+        result = value * base.vw;
+        break;
+      case 'vh':
+        result = value * base.vh;
+        break;
+      case 'vmin':
+        result = value * min(base.vw, base.vh);
+        break;
+      case 'vmax':
+        result = value * max(base.vw, base.vh);
+        break;
       default:
         throw FssParseException('Unit not supported: $unit');
     }
@@ -2432,15 +2483,30 @@ class FssAngle {
 /// Stores some base line values for size conversion
 @immutable
 class FssBase {
-  static const fallback =
-      FssBase(remBase: FssSize.baseFontSize, emBase: FssSize.baseFontSize);
+  static const double dummyScreenWidth = 1024;
+  static const double dummyScreenHeight = 768;
+
+  static const fallback = FssBase(
+    remBase: FssSize.baseFontSize,
+    emBase: FssSize.baseFontSize,
+    screenWidth: dummyScreenWidth,
+    screenHeight: dummyScreenHeight,
+  );
 
   final double rem;
   final double em;
+  final double vw;
+  final double vh;
 
-  const FssBase({double? remBase, double? emBase})
-      : rem = remBase ?? FssSize.baseFontSize,
-        em = emBase ?? FssSize.baseFontSize;
+  const FssBase({
+    double? remBase,
+    double? emBase,
+    required double screenWidth,
+    required double screenHeight,
+  })  : rem = remBase ?? FssSize.baseFontSize,
+        em = emBase ?? FssSize.baseFontSize,
+        vw = screenWidth / 100.0,
+        vh = screenHeight / 100.0;
 }
 
 /// Widget builder callback that gives you access to the "applicable properties".

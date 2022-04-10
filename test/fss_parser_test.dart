@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fss/fss.dart';
+import 'package:fss/src/fss_parser.dart';
 
 /// All kind of unit tests for the parser.
 
@@ -500,6 +501,25 @@ void main() {
       );
     });
 
+    test('Parse relative sizes', () {
+      const input = '''
+        test { 
+           min-height: 10vh;
+           height: 50vh;
+           max-height: 100vh;
+           min-width: 10vw;
+           width: 50vw;
+           max-width: 100vw;
+        } ''';
+      final styles = parseStylesheet(input).first.properties;
+      expect(styles.minHeight, FssBase.dummyScreenHeight / 10);
+      expect(styles.height, FssBase.dummyScreenHeight / 2);
+      expect(styles.maxHeight, FssBase.dummyScreenHeight);
+      expect(styles.minWidth, FssBase.dummyScreenWidth / 10);
+      expect(styles.width, FssBase.dummyScreenWidth / 2);
+      expect(styles.maxWidth, FssBase.dummyScreenWidth);
+    });
+
     // -------------------------------------------------------------
     test('Parse margin', () {
       const input = '''
@@ -508,6 +528,83 @@ void main() {
         } ''';
       final styles = parseStylesheet(input).first.properties;
       expect(styles.margin, const EdgeInsets.all(10));
+    });
+
+    // -------------------------------------------------------------
+    test('Parse padding', () {
+      const input = '''
+        test { 
+           padding: 10px;
+        } ''';
+      final styles = parseStylesheet(input).first.properties;
+      expect(styles.padding, const EdgeInsets.all(10));
+    });
+
+    // -------------------------------------------------------------
+    test('List style decimal', () {
+      const input = '''
+        test { 
+           list-style-type: decimal;
+        } ''';
+      final styles = parseStylesheet(input).first.properties;
+      expect(styles.getListStyleSymbol(0, 10), '0.');
+      expect(styles.getListStyleSymbol(5, 10), '5.');
+      expect(styles.getListStyleSymbol(10, 10), '10.');
+      expect(styles.getListStyleSymbol(-1, 10), '-1.');
+      expect(styles.getListStyleSymbol(5, 100), '5.');
+    });
+    // -------------------------------------------------------------
+    test('List style decimal leading zero', () {
+      const input = '''
+        test { 
+           list-style-type: decimal-leading-zero;
+        } ''';
+      final styles = parseStylesheet(input).first.properties;
+      expect(styles.getListStyleSymbol(0, 10), '00.');
+      expect(styles.getListStyleSymbol(5, 10), '05.');
+      expect(styles.getListStyleSymbol(10, 10), '10.');
+      expect(styles.getListStyleSymbol(-1, 10), '-1.');
+      // FIX THIS? expect(styles.getListStyleSymbol(-1, 100), '-1.');
+      expect(styles.getListStyleSymbol(5, 100), '005.');
+    });
+    // -------------------------------------------------------------
+    test('List style lower latin', () {
+      const input = '''
+        test { 
+           list-style-type: lower-latin;
+        } ''';
+      final styles = parseStylesheet(input).first.properties;
+      expect(styles.getListStyleSymbol(1, 10), 'a.');
+      expect(styles.getListStyleSymbol(5, 10), 'e.');
+      expect(styles.getListStyleSymbol(10, 10), 'j.');
+      expect(styles.getListStyleSymbol(20, 100), 't.');
+      // FIX number > 26 expect(styles.getListStyleSymbol(100, 100), '??.');
+    });
+    // -------------------------------------------------------------
+    test('List style upper roman', () {
+      const input = '''
+        test { 
+           list-style-type: upper-roman;
+        } ''';
+      final styles = parseStylesheet(input).first.properties;
+      expect(styles.getListStyleSymbol(1, 10), 'I.');
+      expect(styles.getListStyleSymbol(5, 10), 'V.');
+      expect(styles.getListStyleSymbol(10, 10), 'X.');
+      expect(styles.getListStyleSymbol(20, 100), 'XX.');
+      expect(styles.getListStyleSymbol(100, 100), 'C.');
+    });
+    // -------------------------------------------------------------
+    test('List style lower greek', () {
+      const input = '''
+        test { 
+           list-style-type: lower-greek;
+        } ''';
+      final styles = parseStylesheet(input).first.properties;
+      expect(styles.getListStyleSymbol(1, 10), 'α.');
+      expect(styles.getListStyleSymbol(5, 10), 'ε.');
+      expect(styles.getListStyleSymbol(10, 10), 'κ.');
+      expect(styles.getListStyleSymbol(20, 100), 'τ.');
+      expect(styles.getListStyleSymbol(100, 100), 'Д.');
     });
   });
 
@@ -563,6 +660,38 @@ void main() {
       expect(selector.type, 'btn');
       expect(selector.classes[0], '.class1');
       expect(selector.classes[1], ':selected');
+    });
+  });
+
+  // -------------------------------------------------------------
+  // FlutterStylesheet related test cases
+  // -------------------------------------------------------------
+
+  group('Shylesheet methods', () {
+    // -------------------------------------------------------------
+    test('Access stylesheet rules', () {
+      const input = '''
+        test { 
+           line-height: 11px;
+        }
+        test2 { 
+           line-height: 12px;
+        }
+         ''';
+      final st = FlutterStyleSheet(stylesheet: input);
+      expect(st.rules.length, 2);
+    });
+
+    // -------------------------------------------------------------
+    test('Check stylesheet defaults', () {
+      const input = '''
+        test { 
+           line-height: 11px;
+        }
+      ''';
+      final st = FlutterStyleSheet(stylesheet: input);
+      expect(st.systemDefaults.textStyle?.fontSize, FssSize.baseFontSize);
+      expect(st.systemDefaults.color, const Color(0xff000000));
     });
   });
 }

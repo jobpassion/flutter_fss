@@ -76,3 +76,4 @@ build/
 /example/pubspec.lock
 /pubspec.lock
 /coverage/lcov.info
+/coverage/

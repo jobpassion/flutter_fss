@@ -85,6 +85,17 @@ class TestApp extends StatelessWidget {
 
                     // Finally we add an image. It has the fss class "test"
                     Fss.img(src: const AssetImage('test.png'), fssID: 'my_img'),
+
+                    // Screen size proportional sizes
+                    Fss.styled(
+                      fssID: 'screen_info',
+                      builder: (context, styles) => Fss.text(
+                        'Size vw/vh: ${styles.getSize(FssProperty.max_width.name)} x '
+                        '${styles.getSize(FssProperty.max_height.name)}'
+                        ' -> 50%: ${styles.getSize(FssProperty.min_width.name)} x '
+                        '${styles.getSize(FssProperty.min_height.name)}',
+                      ),
+                    ),
                   ],
                 ),
               ),
