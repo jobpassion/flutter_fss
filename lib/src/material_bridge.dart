@@ -91,11 +91,11 @@ class MaterialThemeBridge {
       'primary-color-light',
       FssColor.colorToHex(themeData.primaryColorLight),
     );
-    _addVar(
-      styles,
-      'primary-color-brightness',
-      '${themeData.primaryColorBrightness}',
-    );
+    //_addVar(
+    //  styles,
+    //  'primary-color-brightness',
+    //  '${themeData.primaryColorBrightness}',
+    //);
     _addVar(
       styles,
       'scaffold-background-color',
@@ -166,21 +166,21 @@ class MaterialThemeBridge {
       'color-primary',
       FssColor.colorToHex(themeData.colorScheme.primary),
     );
-    _addVar(
-      styles,
-      'color-primaryvariant',
-      FssColor.colorToHex(themeData.colorScheme.primaryVariant),
-    );
+    //_addVar(
+    //  styles,
+    //  'color-primaryvariant',
+    //  FssColor.colorToHex(themeData.colorScheme.primaryVariant),
+    //);
     _addVar(
       styles,
       'color-secondary',
       FssColor.colorToHex(themeData.colorScheme.secondary),
     );
-    _addVar(
-      styles,
-      'color-secondaryvariant',
-      FssColor.colorToHex(themeData.colorScheme.secondaryVariant),
-    );
+    //_addVar(
+    //  styles,
+    //  'color-secondaryvariant',
+    //  FssColor.colorToHex(themeData.colorScheme.secondaryVariant),
+    //);
     _addVar(
       styles,
       'color-surface',
